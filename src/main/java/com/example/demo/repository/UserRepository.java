@@ -33,6 +33,9 @@ public class UserRepository {
         if (key == 0){
             return false;
         }
+        if(!usersDatabase.get(key).isActive()){
+            throw new lockedAccountException();
+        }
         if(usersDatabase.get(key).getPassword().equals(password)){
             if(usersDatabase.get(key).isActive()){
                 usersDatabase.get(key).setIncorrectLoginCounter(0);
